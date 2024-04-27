@@ -61,8 +61,11 @@ const LoginScreen = ({navigation}: Props) => {
       return;
     }
 
-    // @ts-ignore
-    navigation.navigate(PAGES_NAVIGATION.HOME_SCREEN);
+    navigation.reset({
+      index: 0,
+      //@ts-ignore
+      routes: [{name: PAGES_NAVIGATION.HOME_SCREEN}],
+    });
   };
 
   return (

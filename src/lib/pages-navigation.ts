@@ -6,4 +6,7 @@ export const PAGES_NAVIGATION = {
   REGISTER_SCREEN: 'RegisterScreen',
 
   USER_PROFILE_SCREEN: 'UserProfileScreen',
+
+  GAME_LIST_SCREEN: 'GameListScreen',
+  GAME_SCREEN: 'GameScreen',
 };

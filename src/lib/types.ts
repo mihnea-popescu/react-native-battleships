@@ -52,15 +52,26 @@ interface GameMove {
 
 type GameStatus = 'CREATED' | 'MAP_CONFIG' | 'ACTIVE' | 'FINISHED';
 
-interface Game {
+export interface Game {
+  id: string;
   status: GameStatus;
   moves: GameMove[];
   playerToMove: number | null;
 }
 
-interface GameList {
+export interface GameListGame {
+  id: string;
+  status: GameStatus;
+  player1: User;
+  player2: User | null;
+  player1Id: string;
+  player2Id: string | null;
+  playerToMoveId: string;
+}
+
+export interface GameList {
   total: number;
-  games: Game[];
+  games: GameListGame[];
 }
 
 interface JoinGameResponse {

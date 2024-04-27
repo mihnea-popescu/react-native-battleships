@@ -58,8 +58,6 @@ const RegisterScreen = ({navigation}: Props) => {
       return;
     }
 
-    console.log('register: ', response);
-
     const loginResponse = await loginSubmit({
       email,
       password,
@@ -70,10 +68,11 @@ const RegisterScreen = ({navigation}: Props) => {
       return;
     }
 
-    console.log('login: ', loginResponse);
-
-    // @ts-ignore
-    navigation.navigate(PAGES_NAVIGATION.HOME_SCREEN);
+    navigation.reset({
+      index: 0,
+      //@ts-ignore
+      routes: [{name: PAGES_NAVIGATION.HOME_SCREEN}],
+    });
   };
 
   return (

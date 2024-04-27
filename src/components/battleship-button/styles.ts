@@ -5,9 +5,12 @@ interface Style {
   container: ViewStyle;
   primaryButton: ViewStyle;
   primaryButtonText: TextStyle;
+  secondaryButton: ViewStyle;
+  secondaryButtonText: TextStyle;
 }
 
 const PRIMARY_BUTTON_HEIGHT = 50;
+const SECONDARY_BUTTON_HEIGHT = 40;
 
 export default StyleSheet.create<Style>({
   container: {
@@ -23,6 +26,19 @@ export default StyleSheet.create<Style>({
     borderRadius: BORDER_RADIUS.xlarge,
   },
   primaryButtonText: {
+    color: COLORS.WHITE,
+  },
+
+  secondaryButton: {
+    width: '50%',
+    minHeight: SECONDARY_BUTTON_HEIGHT,
+    backgroundColor: COLORS.TEXT.SECONDARY,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: BORDER_WIDTH.small,
+    borderRadius: BORDER_RADIUS.xlarge,
+  },
+  secondaryButtonText: {
     color: COLORS.WHITE,
   },
 });

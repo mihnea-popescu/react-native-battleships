@@ -8,13 +8,14 @@ import BattleshipText, {
   BattleshipTextSize,
 } from '../battleship-text/BattleshipText';
 
-export type BattleshipButtonType = 'primary';
+export type BattleshipButtonType = 'primary' | 'secondary';
 
 interface BattleshipButtonProps {
   type?: BattleshipButtonType;
   onPress?: () => void;
   loading?: boolean;
   text?: string;
+  disabled?: boolean;
 }
 
 const BattleshipButton = ({
@@ -22,6 +23,7 @@ const BattleshipButton = ({
   onPress,
   loading = false,
   text,
+  disabled = false,
 }: BattleshipButtonProps) => {
   const buttonStyle = React.useMemo(() => {
     return getBattleshipButtonStyle(type);
@@ -32,7 +34,7 @@ const BattleshipButton = ({
       style={[styles.container, buttonStyle?.container]}
       activeOpacity={ACTIVE_OPACITY}
       onPress={onPress}
-      disabled={loading}>
+      disabled={loading || disabled}>
       {loading && <ActivityIndicator animating color={COLORS.WHITE} />}
       {!loading && text && (
         <BattleshipText

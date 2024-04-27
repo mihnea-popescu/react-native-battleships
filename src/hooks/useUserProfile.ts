@@ -1,8 +1,8 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../store';
 import {RequestStatus} from '../lib/types';
-import {fetchProfile} from '../store/thunks/profileThunk';
 import React from 'react';
+import {fetchProfile} from '../store/thunks/profileThunk';
 
 const useUserProfile = () => {
   const dispatch = useDispatch<AppDispatch>();

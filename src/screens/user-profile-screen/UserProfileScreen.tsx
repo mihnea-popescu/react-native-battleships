@@ -1,24 +1,15 @@
 import {View} from 'react-native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import styles from './styles';
 import HeaderWithTitle from '../../components/header-with-title/HeaderWithTitle';
 import useUserProfile from '../../hooks/useUserProfile';
-import {useDispatch} from 'react-redux';
-import {AppDispatch} from '../../store';
-import {fetchProfile} from '../../store/thunks/profileThunk';
 import BattleshipText from '../../components/battleship-text/BattleshipText';
 
 type Props = NativeStackScreenProps<{}>;
 
 const UserProfileScreen = ({navigation}: Props) => {
-  const dispatch = useDispatch<AppDispatch>();
-
   const {profile} = useUserProfile();
-
-  useEffect(() => {
-    dispatch(fetchProfile());
-  }, [dispatch]);
 
   return (
     <View style={styles.container}>

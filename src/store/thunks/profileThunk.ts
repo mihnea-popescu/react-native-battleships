@@ -7,7 +7,6 @@ export const fetchProfile = createAsyncThunk(
   async (_, {rejectWithValue}) => {
     try {
       const response = await axios.get<UserDetails>('/user/details/me');
-      console.log('response:', response.data);
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error.response.data);

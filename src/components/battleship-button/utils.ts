@@ -9,6 +9,12 @@ export function getBattleshipButtonStyle(type: BattleshipButtonType) {
         text: styles.primaryButtonText,
         textSize: 'large',
       };
+    case 'secondary':
+      return {
+        container: styles.secondaryButton,
+        text: styles.secondaryButtonText,
+        textSize: 'medium',
+      };
     default:
       return {
         container: styles.primaryButton,
