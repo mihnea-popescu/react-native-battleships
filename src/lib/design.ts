@@ -52,4 +52,4 @@ const dimensions = Dimensions.get('window');
 export const SCREEN_WIDTH = dimensions.width;
 export const SCREEN_HEIGHT = dimensions.height;
 
-export const ROOT_PADDING_TOP = Platform.OS === 'ios' ? SPACING.xlarge : 0;
+export const ROOT_PADDING_TOP = Platform.OS === 'ios' ? SPACING.xxlarge : 0;

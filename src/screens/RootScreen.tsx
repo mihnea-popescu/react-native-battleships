@@ -10,6 +10,7 @@ import {isLoggedIn} from '../lib/storage/user-storage';
 import AuthenticateScreen from './authenticate-screen/AuthenticateScreen';
 import LoginScreen from './login-screen/LoginScreen';
 import RegisterScreen from './register-screen/RegisterScreen';
+import UserProfileScreen from './user-profile-screen/UserProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,10 +27,6 @@ const RootScreen = () => {
                 : PAGES_NAVIGATION.AUTHENTICATE_SCREEN
             }>
             <Stack.Screen
-              name={PAGES_NAVIGATION.HOME_SCREEN}
-              component={HomeScreen}
-            />
-            <Stack.Screen
               name={PAGES_NAVIGATION.AUTHENTICATE_SCREEN}
               component={AuthenticateScreen}
             />
@@ -37,10 +34,18 @@ const RootScreen = () => {
               name={PAGES_NAVIGATION.LOGIN_SCREEN}
               component={LoginScreen}
             />
-
             <Stack.Screen
               name={PAGES_NAVIGATION.REGISTER_SCREEN}
               component={RegisterScreen}
+            />
+
+            <Stack.Screen
+              name={PAGES_NAVIGATION.HOME_SCREEN}
+              component={HomeScreen}
+            />
+            <Stack.Screen
+              name={PAGES_NAVIGATION.USER_PROFILE_SCREEN}
+              component={UserProfileScreen}
             />
           </Stack.Navigator>
         </NavigationContainer>

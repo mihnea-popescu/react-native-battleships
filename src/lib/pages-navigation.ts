@@ -4,4 +4,6 @@ export const PAGES_NAVIGATION = {
   AUTHENTICATE_SCREEN: 'AuthenticateScreen',
   LOGIN_SCREEN: 'LoginScreen',
   REGISTER_SCREEN: 'RegisterScreen',
+
+  USER_PROFILE_SCREEN: 'UserProfileScreen',
 };

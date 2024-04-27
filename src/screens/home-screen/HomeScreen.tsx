@@ -1,20 +1,17 @@
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
 import BattleshipButton from '../../components/battleship-button/BattleshipButton';
 import logOut from '../../lib/auth/logout';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {PAGES_NAVIGATION} from '../../lib/pages-navigation';
-import useUserProfile from '../../hooks/useUserProfile';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../../store';
+import styles from './styles';
 
 type Props = NativeStackScreenProps<{}>;
 
 const HomeScreen = ({navigation}: Props) => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const {profile} = useUserProfile();
-  console.log(profile);
 
   const logOutOnPress = () => {
     logOut({
@@ -25,11 +22,21 @@ const HomeScreen = ({navigation}: Props) => {
     navigation.navigate(PAGES_NAVIGATION.AUTHENTICATE_SCREEN);
   };
 
-  return (
-    <View>
-      <Text>HomeScreen</Text>
+  const viewProfile = () => {
+    // @ts-ignore
+    navigation.navigate(PAGES_NAVIGATION.USER_PROFILE_SCREEN);
+  };
 
-      <BattleshipButton onPress={logOutOnPress} text="logout" />
+  return (
+    <View style={styles.container}>
+      <View style={styles.headerRow}>
+        <View style={styles.headerButton}>
+          <BattleshipButton text="Log out" onPress={logOutOnPress} />
+        </View>
+        <View style={styles.headerButton}>
+          <BattleshipButton text="Profile" onPress={viewProfile} />
+        </View>
+      </View>
     </View>
   );
 };

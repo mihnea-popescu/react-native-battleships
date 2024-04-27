@@ -32,7 +32,9 @@ const useLogin = () => {
 
       UserMMKVStorage.set('auth-token', token);
 
-      dispatch(fetchProfile());
+      setTimeout(() => {
+        dispatch(fetchProfile());
+      });
 
       return {
         success: true,
