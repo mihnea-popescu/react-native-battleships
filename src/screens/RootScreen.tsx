@@ -6,6 +6,10 @@ import HomeScreen from './home-screen/HomeScreen';
 import {PaperProvider} from 'react-native-paper';
 import store from '../store';
 import {Provider} from 'react-redux';
+import {isLoggedIn} from '../lib/storage/user-storage';
+import AuthenticateScreen from './authenticate-screen/AuthenticateScreen';
+import LoginScreen from './login-screen/LoginScreen';
+import RegisterScreen from './register-screen/RegisterScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,10 +20,27 @@ const RootScreen = () => {
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{headerShown: false}}
-            initialRouteName={PAGES_NAVIGATION.HOME_SCREEN}>
+            initialRouteName={
+              isLoggedIn
+                ? PAGES_NAVIGATION.HOME_SCREEN
+                : PAGES_NAVIGATION.AUTHENTICATE_SCREEN
+            }>
             <Stack.Screen
               name={PAGES_NAVIGATION.HOME_SCREEN}
               component={HomeScreen}
+            />
+            <Stack.Screen
+              name={PAGES_NAVIGATION.AUTHENTICATE_SCREEN}
+              component={AuthenticateScreen}
+            />
+            <Stack.Screen
+              name={PAGES_NAVIGATION.LOGIN_SCREEN}
+              component={LoginScreen}
+            />
+
+            <Stack.Screen
+              name={PAGES_NAVIGATION.REGISTER_SCREEN}
+              component={RegisterScreen}
             />
           </Stack.Navigator>
         </NavigationContainer>
