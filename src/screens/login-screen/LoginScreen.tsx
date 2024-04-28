@@ -95,7 +95,7 @@ const LoginScreen = ({navigation}: Props) => {
           {errorMessage && <FieldError errors={[errorMessage]} />}
           <View style={styles.row}>
             <BattleshipButton
-              text="Loghează-te"
+              text="Login"
               onPress={submitForm}
               loading={loading}
             />
