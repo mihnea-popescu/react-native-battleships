@@ -24,11 +24,11 @@ const LoginScreen = ({navigation}: Props) => {
     let errorMsg = '';
 
     if (!email || email.length < 5 || email.length > 100) {
-      errorMsg = 'Adresa de email trebuie să aibă între 5 și 100 de caractere.';
+      errorMsg = 'The email address must be between 5 and 100 characters long.';
     }
 
     if (!password || password.length < 5 || password.length > 100) {
-      errorMsg = 'Parola trebuie să aibă între 5 și 100 de caractere';
+      errorMsg = 'The password must be between 5 and 100 characters long.';
     }
 
     setErrorMessage(errorMsg);
@@ -80,14 +80,14 @@ const LoginScreen = ({navigation}: Props) => {
           <TextField
             value={email}
             onChangeText={setEmail}
-            label="Adresă de mail"
+            label="Email address"
             placeholder={'mihnea@test.ro'}
             disabled={loading}
           />
           <TextField
             value={password}
             onChangeText={setPassword}
-            label="Parolă"
+            label="Password"
             placeholder="*****"
             isPassword
             disabled={loading}

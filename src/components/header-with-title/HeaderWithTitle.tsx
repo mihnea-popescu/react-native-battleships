@@ -1,4 +1,4 @@
-import {View, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity, StyleProp, ViewStyle} from 'react-native';
 import React from 'react';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Icon} from 'react-native-paper';
@@ -11,11 +11,13 @@ const HeaderWithTitle = ({
   navigation,
   title,
   onBack,
+  style,
 }: {
   // @ts-ignore
   navigation: NativeStackNavigationProp<ParamListBase, RouteName, NavigatorID>;
   title: string;
   onBack?: () => void;
+  style?: StyleProp<ViewStyle>;
 }) => {
   const goBack = React.useCallback(() => {
     navigation.goBack();
@@ -23,7 +25,7 @@ const HeaderWithTitle = ({
   }, [navigation, onBack]);
 
   return (
-    <View style={styles.header}>
+    <View style={[styles.header, style]}>
       <TouchableOpacity
         onPress={goBack}
         activeOpacity={ACTIVE_OPACITY}

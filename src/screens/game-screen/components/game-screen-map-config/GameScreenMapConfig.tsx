@@ -254,7 +254,7 @@ const GameScreenMapConfig = ({gameId}: {gameId: string}) => {
       />
       <BattleshipText
         size="medium"
-        text={`Ship size - ${currentSize}`}
+        text={`Ship size: ${currentSize}`}
         style={styles.infoText}
       />
       {renderDirectionPicker()}

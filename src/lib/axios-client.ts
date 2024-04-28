@@ -6,12 +6,21 @@ const axios = Axios.create({
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
     'Content-Type': 'application/json',
-    ...{
-      Authorization: UserMMKVStorage.contains('auth-token')
-        ? `Bearer ${UserMMKVStorage.getString('auth-token')}`
-        : undefined,
-    },
   },
 });
+
+axios.interceptors.request.use(
+  async config => {
+    const tokenExists = UserMMKVStorage.contains('auth-token');
+    if (tokenExists) {
+      const token = UserMMKVStorage.getString('auth-token');
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  },
+);
 
 export default axios;

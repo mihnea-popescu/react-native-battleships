@@ -9,7 +9,26 @@ import BattleshipText from '../../components/battleship-text/BattleshipText';
 type Props = NativeStackScreenProps<{}>;
 
 const UserProfileScreen = ({navigation}: Props) => {
-  const {profile} = useUserProfile();
+  const {requestStatus, profile} = useUserProfile();
+
+  if (requestStatus === 'error') {
+    return (
+      <View style={styles.container}>
+        <HeaderWithTitle navigation={navigation} title="Profile" />
+        <View style={styles.content}>
+          <View style={styles.card}>
+            <View style={styles.row}>
+              <BattleshipText
+                text={'An error has occured.'}
+                style={styles.text}
+                size="large"
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
