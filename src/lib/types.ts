@@ -48,7 +48,7 @@ export interface PlayerStrike {
   y: number;
 }
 
-interface GameMove {
+export interface GameMove {
   x: GameTableColumn;
   y: number;
   result: boolean;

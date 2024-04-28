@@ -10,6 +10,7 @@ import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../../store';
 import {clearCurrentGame} from '../../store/slices/currentGameSlice';
 import GameScreenActive from './components/game-screen-active/GameScreenActive';
+import GameScreenFinished from './components/game-screen-finished/GameScreenFinished';
 
 type RootStackParamList = {
   GameScreen: {
@@ -25,15 +26,21 @@ const GameScreen = ({navigation, route}: Props) => {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const {game, refresh} = useCurrentGame(gameId);
+  const {requestStatus, game, refresh} = useCurrentGame(gameId);
 
   const gameRefreshInterval = React.useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    if (!gameRefreshInterval.current && game) {
+    if (!gameRefreshInterval.current && game?.status !== 'FINISHED') {
       gameRefreshInterval.current = setInterval(() => {
         refresh();
       }, 2500);
+    }
+
+    // Clear interval for finished games
+    if (gameRefreshInterval.current && game?.status === 'FINISHED') {
+      clearInterval(gameRefreshInterval.current);
+      gameRefreshInterval.current = null;
     }
 
     return () => {
@@ -60,6 +67,19 @@ const GameScreen = ({navigation, route}: Props) => {
 
   const mapConfig = () => <GameScreenMapConfig gameId={gameId} />;
   const activeGame = () => <GameScreenActive gameId={gameId} />;
+  const finishedGame = () => <GameScreenFinished gameId={gameId} />;
+
+  if (requestStatus === 'error') {
+    <View style={styles.container}>
+      <View style={styles.createdContainer}>
+        <BattleshipText
+          size="large"
+          text="There has been an error."
+          style={styles.createdText}
+        />
+      </View>
+    </View>;
+  }
 
   return (
     <View style={styles.container}>
@@ -72,6 +92,7 @@ const GameScreen = ({navigation, route}: Props) => {
         {game?.status === 'CREATED' && createdGame()}
         {game?.status === 'MAP_CONFIG' && mapConfig()}
         {game?.status === 'ACTIVE' && activeGame()}
+        {game?.status === 'FINISHED' && finishedGame()}
       </View>
     </View>
   );

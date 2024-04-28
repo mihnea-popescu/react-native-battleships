@@ -27,7 +27,8 @@ const GameListScreen = ({navigation}: Props) => {
     if (
       !game.player2 ||
       game.player1Id === profile?.user.id ||
-      game.player2Id === profile?.user.id
+      game.player2Id === profile?.user.id ||
+      game.status === 'FINISHED'
     ) {
       return true;
     }
@@ -40,7 +41,11 @@ const GameListScreen = ({navigation}: Props) => {
       return false;
     }
 
-    dispatch(joinGame({id: game.id, callback: joinedGame}));
+    if (game.status === 'CREATED') {
+      dispatch(joinGame({id: game.id, callback: joinedGame}));
+    } else {
+      joinedGame(game.id);
+    }
   };
 
   const joinedGame = (id: string) => {
@@ -61,7 +66,7 @@ const GameListScreen = ({navigation}: Props) => {
           />
         </View>
         {requestStatus === 'success' &&
-          games.map((game, i) => (
+          [...games].reverse().map((game, i) => (
             <TouchableOpacity
               style={styles.gameContainer}
               activeOpacity={ACTIVE_OPACITY}
