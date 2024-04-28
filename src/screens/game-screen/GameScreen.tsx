@@ -9,6 +9,7 @@ import GameScreenMapConfig from './components/game-screen-map-config/GameScreenM
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../../store';
 import {clearCurrentGame} from '../../store/slices/currentGameSlice';
+import GameScreenActive from './components/game-screen-active/GameScreenActive';
 
 type RootStackParamList = {
   GameScreen: {
@@ -58,6 +59,7 @@ const GameScreen = ({navigation, route}: Props) => {
   );
 
   const mapConfig = () => <GameScreenMapConfig gameId={gameId} />;
+  const activeGame = () => <GameScreenActive gameId={gameId} />;
 
   return (
     <View style={styles.container}>
@@ -69,6 +71,7 @@ const GameScreen = ({navigation, route}: Props) => {
       <View style={styles.content}>
         {game?.status === 'CREATED' && createdGame()}
         {game?.status === 'MAP_CONFIG' && mapConfig()}
+        {game?.status === 'ACTIVE' && activeGame()}
       </View>
     </View>
   );

@@ -43,7 +43,7 @@ export interface GameTablePosition {
   y: number;
 }
 
-interface PlayerStrike {
+export interface PlayerStrike {
   x: GameTableColumn;
   y: number;
 }
@@ -52,7 +52,7 @@ interface GameMove {
   x: GameTableColumn;
   y: number;
   result: boolean;
-  playerId: number;
+  playerId: string;
 }
 
 type GameStatus = 'CREATED' | 'MAP_CONFIG' | 'ACTIVE' | 'FINISHED';
@@ -97,6 +97,7 @@ export interface Ship {
   y: number;
   size: number;
   direction: GameTableDirection;
+  playerId?: string;
 }
 
 export interface MapConfigBody {

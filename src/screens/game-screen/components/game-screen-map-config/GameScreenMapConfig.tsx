@@ -125,12 +125,15 @@ const GameScreenMapConfig = ({gameId}: {gameId: string}) => {
     if (direction === 'HORIZONTAL') {
       for (let i = 0; i < currentSize; i++) {
         if (
-          isPositionInArray(shipCoords, {
-            x: GAME_COLUMNS[
-              GAME_COLUMNS.findIndex(col => col === position.x) + i
-            ],
-            y: position.y,
-          })
+          isPositionInArray(
+            {
+              x: GAME_COLUMNS[
+                GAME_COLUMNS.findIndex(col => col === position.x) + i
+              ],
+              y: position.y,
+            },
+            shipCoords,
+          )
         ) {
           setErrorMessage('Cannot overlap with another ship!');
           return;
@@ -141,10 +144,13 @@ const GameScreenMapConfig = ({gameId}: {gameId: string}) => {
     if (direction === 'VERTICAL') {
       for (let i = 0; i < currentSize; i++) {
         if (
-          isPositionInArray(shipCoords, {
-            x: position.x,
-            y: position.y + i,
-          })
+          isPositionInArray(
+            {
+              x: position.x,
+              y: position.y + i,
+            },
+            shipCoords,
+          )
         ) {
           setErrorMessage('Cannot overlap with another ship!');
           return;
@@ -193,10 +199,10 @@ const GameScreenMapConfig = ({gameId}: {gameId: string}) => {
                     activeOpacity={ACTIVE_OPACITY}
                     disabled={
                       disablePlacing ||
-                      isPositionInArray(shipCoords, {x: col, y: row})
+                      isPositionInArray({x: col, y: row}, shipCoords)
                     }
                     onPress={() => placeShip({x: col, y: row})}>
-                    {isPositionInArray(shipCoords, {x: col, y: row}) ? (
+                    {isPositionInArray({x: col, y: row}, shipCoords) ? (
                       <BattleshipText size="small" text="🚢" />
                     ) : null}
                   </TouchableOpacity>

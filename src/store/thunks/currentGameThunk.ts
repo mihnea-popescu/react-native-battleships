@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import axios from '../../lib/axios-client';
-import {Game, MapConfigBody} from '../../lib/types';
+import {Game, MapConfigBody, PlayerStrike} from '../../lib/types';
 
 export const fetchCurrentGame = createAsyncThunk(
   'currentGame/fetchCurrentGame',
@@ -27,6 +27,25 @@ export const sendCurrentGameMapConfig = createAsyncThunk(
       );
       return response.data;
     } catch (error: any) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+
+export const sendStrike = createAsyncThunk(
+  'currentGame/sendStrike',
+  async (
+    {gameId, strike}: {gameId: string; strike: PlayerStrike},
+    {rejectWithValue},
+  ) => {
+    try {
+      const response = await axios.post(
+        `/game/strike/${gameId}`,
+        JSON.stringify(strike),
+      );
+      return response.data;
+    } catch (error: any) {
+      console.error('Error: ', error);
       return rejectWithValue(error.response.data);
     }
   },

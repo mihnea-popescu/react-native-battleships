@@ -20,8 +20,11 @@ export const GAME_PLOT_SIZE =
   (SCREEN_WIDTH - 2 * SPACING.medium - SPACING.large) / 10;
 
 export const isPositionInArray = (
-  array: GameTablePosition[],
   position: GameTablePosition,
+  array?: GameTablePosition[],
 ) => {
+  if (!array) {
+    return false;
+  }
   return array.some(item => item.x === position.x && item.y === position.y);
 };
