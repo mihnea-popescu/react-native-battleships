@@ -25,7 +25,7 @@ export interface APIResponse {
 
 export type RequestStatus = 'initial-loading' | 'loading' | 'success' | 'error';
 
-type GameTableColumn =
+export type GameTableColumn =
   | 'A'
   | 'B'
   | 'C'
@@ -36,7 +36,12 @@ type GameTableColumn =
   | 'H'
   | 'I'
   | 'J';
-type GameTableDirection = 'HORIZONTAL' | 'VERTICAL';
+export type GameTableDirection = 'HORIZONTAL' | 'VERTICAL';
+
+export interface GameTablePosition {
+  x: GameTableColumn;
+  y: number;
+}
 
 interface PlayerStrike {
   x: GameTableColumn;
@@ -56,7 +61,12 @@ export interface Game {
   id: string;
   status: GameStatus;
   moves: GameMove[];
-  playerToMove: number | null;
+  player1: User;
+  player2: User | null;
+  player1Id: string;
+  player2Id: string | null;
+  playerToMoveId: string;
+  shipsCoord: Ship[];
 }
 
 export interface GameListGame {
@@ -82,13 +92,13 @@ interface JoinGameResponse {
   playerToMoveId: string;
 }
 
-interface Ship {
+export interface Ship {
   x: GameTableColumn;
   y: number;
   size: number;
   direction: GameTableDirection;
 }
 
-interface MapConfigBody {
+export interface MapConfigBody {
   ships: Ship[];
 }

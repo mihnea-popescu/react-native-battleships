@@ -10,14 +10,17 @@ import BattleshipText from '../battleship-text/BattleshipText';
 const HeaderWithTitle = ({
   navigation,
   title,
+  onBack,
 }: {
   // @ts-ignore
   navigation: NativeStackNavigationProp<ParamListBase, RouteName, NavigatorID>;
   title: string;
+  onBack?: () => void;
 }) => {
   const goBack = React.useCallback(() => {
     navigation.goBack();
-  }, [navigation]);
+    onBack?.();
+  }, [navigation, onBack]);
 
   return (
     <View style={styles.header}>

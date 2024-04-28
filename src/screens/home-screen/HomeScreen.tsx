@@ -46,18 +46,8 @@ const HomeScreen = ({navigation}: Props) => {
       return;
     }
 
-    navigation.reset({
-      index: 0,
-      routes: [
-        {
-          // @ts-ignore
-          name: PAGES_NAVIGATION.GAME_SCREEN,
-          params: {
-            id,
-          },
-        },
-      ],
-    });
+    //@ts-ignore
+    navigation.navigate(PAGES_NAVIGATION.GAME_SCREEN, {id});
   };
 
   return (

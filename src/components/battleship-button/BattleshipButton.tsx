@@ -1,4 +1,4 @@
-import {TouchableOpacity} from 'react-native';
+import {StyleProp, TouchableOpacity, ViewStyle} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import {ActivityIndicator} from 'react-native-paper';
@@ -16,6 +16,7 @@ interface BattleshipButtonProps {
   loading?: boolean;
   text?: string;
   disabled?: boolean;
+  style?: StyleProp<ViewStyle>;
 }
 
 const BattleshipButton = ({
@@ -24,6 +25,7 @@ const BattleshipButton = ({
   loading = false,
   text,
   disabled = false,
+  style,
 }: BattleshipButtonProps) => {
   const buttonStyle = React.useMemo(() => {
     return getBattleshipButtonStyle(type);
@@ -31,7 +33,7 @@ const BattleshipButton = ({
 
   return (
     <TouchableOpacity
-      style={[styles.container, buttonStyle?.container]}
+      style={[styles.container, buttonStyle?.container, style]}
       activeOpacity={ACTIVE_OPACITY}
       onPress={onPress}
       disabled={loading || disabled}>
