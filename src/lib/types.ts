@@ -84,7 +84,7 @@ export interface GameList {
   games: GameListGame[];
 }
 
-interface JoinGameResponse {
+export interface JoinGameResponse {
   id: string;
   status: GameStatus;
   player1Id: string;

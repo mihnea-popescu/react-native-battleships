@@ -17,11 +17,7 @@ export const fetchCurrentGame = createAsyncThunk(
 export const sendCurrentGameMapConfig = createAsyncThunk(
   'currentGame/sendCurrentGameMapConfig',
   async (
-    {
-      gameId,
-      mapConfig,
-      callback,
-    }: {gameId: string; mapConfig: MapConfigBody; callback: () => void},
+    {gameId, mapConfig}: {gameId: string; mapConfig: MapConfigBody},
     {rejectWithValue},
   ) => {
     try {
@@ -29,7 +25,6 @@ export const sendCurrentGameMapConfig = createAsyncThunk(
         `/game/${gameId}`,
         JSON.stringify(mapConfig),
       );
-      callback?.();
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error.response.data);

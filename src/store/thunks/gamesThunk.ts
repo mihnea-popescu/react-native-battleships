@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import axios from '../../lib/axios-client';
-import {Game, GameList, GameListGame} from '../../lib/types';
+import {GameList, GameListGame, JoinGameResponse} from '../../lib/types';
 
 export const fetchGames = createAsyncThunk(
   'games/fetchGames',
@@ -34,7 +34,7 @@ export const joinGame = createAsyncThunk(
     {rejectWithValue},
   ) => {
     try {
-      const response = await axios.post<Game>(`/game/join/${id}`);
+      const response = await axios.post<JoinGameResponse>(`/game/join/${id}`);
       callback(response.data.id);
     } catch (error: any) {
       console.log('Error: ', error);

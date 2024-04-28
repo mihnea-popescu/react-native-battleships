@@ -1,11 +1,10 @@
 import {View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import styles from './styles';
 import HeaderWithTitle from '../../components/header-with-title/HeaderWithTitle';
 import useCurrentGame from '../../hooks/useCurrentGame';
 import BattleshipText from '../../components/battleship-text/BattleshipText';
-import BattleshipButton from '../../components/battleship-button/BattleshipButton';
 import GameScreenMapConfig from './components/game-screen-map-config/GameScreenMapConfig';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../../store';
@@ -25,11 +24,24 @@ const GameScreen = ({navigation, route}: Props) => {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const {
-    requestStatus,
-    game,
-    refresh: refreshCurrentGame,
-  } = useCurrentGame(gameId);
+  const {game, refresh} = useCurrentGame(gameId);
+
+  const gameRefreshInterval = React.useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (!gameRefreshInterval.current && game) {
+      gameRefreshInterval.current = setInterval(() => {
+        refresh();
+      }, 2500);
+    }
+
+    return () => {
+      if (gameRefreshInterval.current) {
+        clearInterval(gameRefreshInterval.current);
+        gameRefreshInterval.current = null;
+      }
+    };
+  }, [game, refresh]);
 
   const onBack = () => {
     dispatch(clearCurrentGame());
@@ -41,12 +53,6 @@ const GameScreen = ({navigation, route}: Props) => {
         size="large"
         text="Waiting for another player to join..."
         style={styles.createdText}
-      />
-      <BattleshipButton
-        text="Refresh"
-        disabled={requestStatus === 'loading'}
-        onPress={refreshCurrentGame}
-        loading={requestStatus === 'loading'}
       />
     </View>
   );

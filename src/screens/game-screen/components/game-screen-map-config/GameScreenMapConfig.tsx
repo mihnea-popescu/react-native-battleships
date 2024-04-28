@@ -1,6 +1,5 @@
 import {TouchableOpacity, View} from 'react-native';
 import React, {useEffect} from 'react';
-import useCurrentGame from '../../../../hooks/useCurrentGame';
 import styles from './styles';
 import BattleshipText from '../../../../components/battleship-text/BattleshipText';
 import BattleshipButton from '../../../../components/battleship-button/BattleshipButton';
@@ -18,8 +17,6 @@ import {sendCurrentGameMapConfig} from '../../../../store/thunks/currentGameThun
 
 const GameScreenMapConfig = ({gameId}: {gameId: string}) => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const {requestStatus, refresh} = useCurrentGame(gameId);
 
   const [placedShips, setPlacedShips] = React.useState<Ship[]>([]);
 
@@ -81,13 +78,12 @@ const GameScreenMapConfig = ({gameId}: {gameId: string}) => {
           mapConfig: {
             ships: placedShips,
           },
-          callback: refresh,
         }),
       );
 
       sentMapConfig.current = true;
     }
-  }, [placedShips, dispatch, gameId, refresh]);
+  }, [placedShips, dispatch, gameId]);
 
   if (placedShips.length >= 10) {
     return (
@@ -96,12 +92,6 @@ const GameScreenMapConfig = ({gameId}: {gameId: string}) => {
           size="large"
           text="Waiting for the other player to send their map config.."
           style={styles.waitingText}
-        />
-        <BattleshipButton
-          text="Refresh"
-          disabled={requestStatus === 'loading'}
-          onPress={refresh}
-          loading={requestStatus === 'loading'}
         />
       </View>
     );
